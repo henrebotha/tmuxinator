@@ -1,0 +1,27 @@
+# ~/.tmuxinator/marketingcms.yml
+
+name: marketingcms
+root: ~/dev/marketingcms
+
+pre: vagrant up
+
+startup_pane: 3
+
+attach: true
+
+windows:
+  - workspace:
+      layout: tiled # b2f9,272x65,0,0[272x24,0,0{136x24,0,0,0,135x24,137,0,4},272x40,0,25{90x40,0,25,1,90x40,91,25,2,9[0/0]182,25,3}]
+      panes:
+        - console:
+          - ssh $(vagrant ssh-config | awk 'NR>1 {print " -o "$1"="$2}') localhost
+          - cd app
+          - bin/rails c
+        - server:
+          - sleep 1
+          - ssh $(vagrant ssh-config | awk 'NR>1 {print " -o "$1"="$2}') localhost
+          - cd app
+          - bin/rails s -b0.0.0.0
+        - #empty
+        - gst
+  - logs: tail -f log/development.log
