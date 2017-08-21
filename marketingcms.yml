@@ -18,7 +18,7 @@ windows:
           - cd app
           - bin/rails c
         - server:
-          - sleep 1
+          - sleep 2
           - ssh $(vagrant ssh-config | awk 'NR>1 {print " -o "$1"="$2}') localhost
           - cd app
           - bin/rails s -b0.0.0.0
