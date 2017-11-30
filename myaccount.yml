@@ -1,0 +1,25 @@
+# ~/.tmuxinator/myaccount.yml
+
+name: myaccount
+root: ~/dev/myaccount-gateway
+
+startup_pane: 3
+
+windows:
+  - myaccount-gateway:
+      root: ~/dev/myaccount-gateway
+      layout: f620,272x64,0,0{136x64,0,0[136x33,0,0,36,136x30,0,34,57],135x64,137,0[135x33,137,0,42,135x30,137,34,54]}
+      panes:
+        - build:
+          - yarn run local
+        - docker:
+          - docker-compose up -d
+        - #empty
+        - git status
+  - node-ts-module:
+      root: ~/dev/node-ts-module
+      layout: e1fb,272x64,0,0{136x64,0,0,64,135x64,137,0,126}
+      panes:
+        - build:
+          - yarn build
+        - git status

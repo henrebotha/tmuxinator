@@ -1,0 +1,24 @@
+# ~/.tmuxinator/angular.yml
+
+name: angular
+root: ~/dev/angular-app
+
+startup_pane: 3
+
+windows:
+  - angular:
+      layout: tiled
+      panes:
+        - build:
+          - gradle watch
+        - git status
+        - #empty
+        - #empty
+  - webapi:
+      root: ~/dev/travelstart/website/website-services
+      layout: main-vertical
+      panes:
+        - build:
+          - gradle build && gradle deploy
+        - run:
+          - $CATALINA_HOME/bin/catalina.sh jpda run
